@@ -12,7 +12,6 @@ hdf5plugin
 tqdm
 
 # required by spikingjelly, but not necessary to us
-loris
 torchaudio
 ninja
 

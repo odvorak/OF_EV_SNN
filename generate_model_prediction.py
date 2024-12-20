@@ -11,7 +11,7 @@ from torch.autograd import Variable
 from spikingjelly.clock_driven import functional
 from spikingjelly.clock_driven import neuron
 
-from network_3d.poolingNet_cat_1res import NeuronPool_Separable_Pool3d
+from network_3d.poolingNet_cat_1res import NeuronPool_Separable_Pool3d_200
 
 
 from tqdm import tqdm
