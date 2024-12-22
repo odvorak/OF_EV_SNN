@@ -1,0 +1,20 @@
+name: of-ev-snn
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - numpy
+  - pandas
+  - pytorch
+  - torchvision
+  - spikingjelly==0.0.0.0.12
+  - opencv
+  - imageio
+  - numba
+  - h5py
+  - hdf5plugin
+  - tqdm
+  # Optional dependencies
+  - torchaudio  # required by spikingjelly but not necessary to you
+  - ninja       # required by spikingjelly but not necessary to you
+  - wandb       # recommended for logs, optional
