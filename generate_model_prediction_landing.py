@@ -28,7 +28,7 @@ flight_list = ["N9", "N10", "N11", "N12", "D9", "D10", "D11", "D12", "V9", "V10"
 
 for flight in flight_list:
     root_folder = f'/root/saved_flow_data_test/{flight}/'
-    sequence_list = f'/root/saved_flow_data_test/sequence_lists/{flight}/'
+    sequence_list = f'/root/saved_flow_data_test/sequence_lists/{flight}.csv'
 
     if not os.path.isdir(f'/root/results/tests/'):
         os.mkdir(f'/root/results/tests/')
