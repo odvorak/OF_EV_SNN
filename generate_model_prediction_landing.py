@@ -20,8 +20,6 @@ from data.dsec_dataset_lite_stereo_21x9 import DSECDatasetLite
 
 import numpy as np
 
-from eval.progress_plot_full_v2_landing import plot_landing_video
-
 import math
 import os
 
