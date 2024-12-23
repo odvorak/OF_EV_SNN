@@ -36,8 +36,8 @@ for flight in flight_list:
     checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_epoch31.pth/'
     results_directory = f'/root/results/{flight}/'
 
-    if not os.path.isdir(os.path.join(results_directory, flight)):
-        os.mkdir(os.path.join(results_directory, flight))
+    if not os.path.isdir(results_directory):
+        os.mkdir(results_directory)
 
     results_directory = os.path.join(results_directory, flight)
     # Enable GPU
