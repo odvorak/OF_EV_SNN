@@ -74,6 +74,7 @@ for flight in flight_list:
         functional.reset_net(net)
         chunk = torch.transpose(chunk, 1, 2)
 
+        chunk = chunk.to(device=device, dtype=torch.float32)
 
         mask = torch.unsqueeze(mask, dim = 1)
         mask = torch.cat((mask, mask), axis = 1)
@@ -92,7 +93,6 @@ for flight in flight_list:
     # Video generation
     pred_sequence = np.array(pred_sequence)
     label_sequence = np.array(label_sequence)
-
 
     if not os.path.isdir(results_directory):
         os.mkdir(results_directory)
