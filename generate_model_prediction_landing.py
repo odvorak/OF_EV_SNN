@@ -17,7 +17,6 @@ from network_3d.poolingNet_cat_1res_200 import NeuronPool_Separable_Pool3d_200
 from tqdm import tqdm
 
 from data.dsec_dataset_lite_stereo_21x9 import DSECDatasetLite
-from make_single_sequence_list import make_sequence_list
 
 import numpy as np
 
@@ -31,7 +30,7 @@ flight_list = ["N9", "N10", "N11", "N12", "D9", "D10", "D11", "D12", "V9", "V10"
 
 for flight in flight_list:
     root_folder = f'/root/saved_flow_data_test/{flight}/'
-    sequence_list = make_sequence_list(flight, root_folder)
+    sequence_list = f'/root/saved_flow_data_test/sequence_lists/{flight}/'
 
     if not os.path.isdir(f'/root/results/tests/'):
         os.mkdir(f'/root/results/tests/')
