@@ -58,47 +58,8 @@ for flight in flight_list:
     # Define validation dataloader
     valid_dataloader = torch.utils.data.DataLoader(dataset = valid_dataset, batch_size = 1, shuffle = False, drop_last = False, pin_memory = True)
 
-    ########################
-    ## TRAINING FRAMEWORK ##
-    ########################
-
-    # Create the network
-
     net = NeuronPool_Separable_Pool3d_200().to(device)
     net.load_state_dict(torch.load(checkpoint))
-
-
-    ##########
-    ## TEST ##
-    ##########
-
-    # Validation Datasetimport random
-
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
-
-    import torchvision.transforms as TvT
-
-    from torch.autograd import Variable
-
-    from spikingjelly.clock_driven import functional
-    from spikingjelly.clock_driven import neuron
-
-    from network_3d.poolingNet_cat_1res import NeuronPool_Separable_Pool3d
-
-
-    from tqdm import tqdm
-
-    from data.dsec_dataset_lite_stereo_21x9 import DSECDatasetLite
-
-    import numpy as np
-
-    from eval.progress_plot_full_v2 import plot_evolution
-
-    import math
-    import os
-
 
     pred_sequence = []
     label_sequence = []
