@@ -100,11 +100,8 @@ optimizer = torch.optim.AdamW(net.parameters(), lr = lr, weight_decay = wd)
 scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones = [10, 20, 35], gamma = 0.5)
 # Define the loss function
 
-mod_fcn = mod_loss_function
+thesis_fcn = thesis_loss_function
 lambda_mod = 1.
-
-ang_fcn = angular_loss_function
-lambda_ang = 1.
 
 # Define the number of epochs
 
@@ -146,8 +143,7 @@ for epoch in range(n_epochs):
     
     running_loss = 0.
 
-    epoch_mod_loss = 0.
-    epoch_ang_loss = 0.
+    epoch_thesis_loss = 0.
 
     batch_iter = 0
 
@@ -170,15 +166,13 @@ for epoch in range(n_epochs):
         pred_list = net(chunk)
         
 
-        mod_loss = 0.
-        ang_loss = 0.
+        thesis_loss = 0.
         curr_loss = 0.
 
         for pred in pred_list:
-            mod_loss += mod_fcn(pred, label, mask)
-            ang_loss += ang_fcn(pred, label, mask)
+            thesis_loss += thesis_fcn(pred, label, mask)
 
-            curr_loss += lambda_mod * mod_loss + lambda_ang * ang_loss
+            curr_loss += 1 * thesis_loss
         
         # We manually verify that the gradients are not exploding
         # If that is the case, the problem can be solved by increasing the network's "multiply_factor" attribute
@@ -200,14 +194,12 @@ for epoch in range(n_epochs):
         
         running_loss += curr_loss.item() * batch_size
 
-        epoch_mod_loss += mod_loss.item() * batch_size
-        epoch_ang_loss += ang_loss.item() * batch_size
+        epoch_thesis_loss += thesis_loss.item() * batch_size
 
     epoch_loss = running_loss / n_chunks_train
 
-    epoch_mod_loss /= n_chunks_train
-    epoch_ang_loss /= n_chunks_train
-    
+    epoch_thesis_loss /= n_chunks_train
+
     print(f'Epoch loss = {epoch_loss}')
 
 
@@ -235,17 +227,14 @@ for epoch in range(n_epochs):
         with torch.no_grad():
             _, _, _, pred = net(chunk)
 
-        mod_loss = mod_fcn(pred, label, mask)
-        ang_loss = ang_fcn(pred, label, mask)
+        thesis_loss = thesis_fcn(pred, label, mask)
 
-        epoch_mod_loss += mod_loss.item() * batch_size
-        epoch_ang_loss += ang_loss.item() * batch_size
+        epoch_thesis_loss += thesis_loss.item() * batch_size
 
 
-    epoch_mod_loss /= n_chunks_train
-    epoch_ang_loss /= n_chunks_train
+    epoch_thesis_loss /= n_chunks_train
 
-    epoch_loss_train_eval = epoch_mod_loss + epoch_ang_loss
+    epoch_loss_train_eval = epoch_thesis_loss
     print('Epoch loss (Validation): {} \n'.format(epoch_loss_train_eval))
 
 
@@ -278,21 +267,17 @@ for epoch in range(n_epochs):
             _, _, _, pred = net(chunk)
 
         
-        mod_loss = mod_fcn(pred, label, mask)
-        ang_loss = ang_fcn(pred, label, mask)
+        thesis_loss = thesis_fcn(pred, label, mask)
 
-        epoch_mod_loss_test += mod_loss.item() * batch_size
-        epoch_ang_loss_test += ang_loss.item() * batch_size
-        
+        epoch_thesis_loss_test += mod_loss.item() * batch_size
 
         pred_sequence.append(torch.squeeze(pred[0,:,:,:]).cpu().detach().numpy())
         label_sequence.append(torch.squeeze(label[0,:,:,:]).cpu().detach().numpy())
     
 
-    epoch_mod_loss_test /= n_chunks_valid
-    epoch_ang_loss_test /= n_chunks_valid
+    epoch_thesis_loss_test /= n_chunks_valid
 
-    epoch_loss_valid = epoch_mod_loss_test + epoch_ang_loss_test
+    epoch_loss_valid = epoch_thesis_loss_test
     print('Epoch loss (Validation): {} \n'.format(epoch_loss_valid))
     
     # Save the network
