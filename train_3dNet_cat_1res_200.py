@@ -207,8 +207,7 @@ for epoch in range(n_epochs):
 
     net.eval()
 
-    epoch_mod_loss = 0.
-    epoch_ang_loss = 0.
+    epoch_thesis_loss = 0.
 
     print('Validating... (training sequence)')
 
@@ -246,8 +245,7 @@ for epoch in range(n_epochs):
 
     net.eval()
 
-    epoch_mod_loss_test = 0.
-    epoch_ang_loss_test = 0.
+    epoch_thesis_loss_test = 0.
 
     print('Validating... (test sequence)')
 
@@ -269,7 +267,7 @@ for epoch in range(n_epochs):
         
         thesis_loss = thesis_fcn(pred, label, mask)
 
-        epoch_thesis_loss_test += mod_loss.item() * batch_size
+        epoch_thesis_loss_test += thesis_loss.item() * batch_size
 
         pred_sequence.append(torch.squeeze(pred[0,:,:,:]).cpu().detach().numpy())
         label_sequence.append(torch.squeeze(label[0,:,:,:]).cpu().detach().numpy())
