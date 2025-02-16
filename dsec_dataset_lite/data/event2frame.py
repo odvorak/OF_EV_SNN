@@ -17,8 +17,6 @@ from typing import Dict, Tuple
 
 
 def rectify_events(x: np.ndarray, y: np.ndarray, rectify_map):
-
-
     height = 480; width = 640
 
     assert rectify_map.shape == (height, width, 2), rectify_map.shape
@@ -29,13 +27,13 @@ def rectify_events(x: np.ndarray, y: np.ndarray, rectify_map):
 
 def cumulate_spikes_into_frames(X_list, Y_list, P_list):
 
-    frame = np.zeros((2, 480, 640), dtype='float')
-
+    frame = np.zeros((2, 200, 200), dtype='float')
     for x, y, p in zip(X_list, Y_list, P_list):
-        if p == 1:
-            frame[0, y, x] += 1  # register ON event on channel 0
-        else:
-            frame[1, y, x] += 1  # register OFF event on channel 1
+        if int(y) > 140 and int(y) <= 339 and int(x) > 220 and int(x) <= 419:
+            if p == 1:
+                frame[0, int(y) - 140, int(x) - 220] += 1  # register ON event on channel 0
+            else:
+                frame[1, int(y) - 140, int(x) - 220] += 1  # register OFF event on channel 1
 
     return frame
 
@@ -109,7 +107,7 @@ class EventSlicer:
         t_start_us_idx = t_start_ms_idx + idx_start_offset
         t_end_us_idx = t_start_ms_idx + idx_end_offset
         # Again add t_offset to get gps time
-        events['t'] = time_array_conservative[idx_start_offset:idx_end_offset] + self.t_offset
+        events['t'] = np.add(time_array_conservative[idx_start_offset:idx_end_offset], self.t_offset, dtype=np.int64)
         for dset_str in ['p', 'x', 'y']:
             events[dset_str] = np.asarray(self.events[dset_str][t_start_us_idx:t_end_us_idx])
             assert events[dset_str].size == events['t'].size

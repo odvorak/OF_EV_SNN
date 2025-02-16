@@ -4,8 +4,8 @@ import imageio
 
 import numpy as np
 
-from .event2frame import EventSlicer
-from .event2frame import rectify_events, cumulate_spikes_into_frames
+from dsec_dataset_lite.data.event2frame import EventSlicer
+from dsec_dataset_lite.data.event2frame import rectify_events, cumulate_spikes_into_frames
 
 import h5py
 
@@ -27,9 +27,9 @@ def generate_files(root: str, sequence: str, num_frames_per_ts: int = 1):
     eventsL_path = os.path.join(root, 'train', sequence, 'events', 'left')
 
 
-    save_path_events = os.path.join(root, 'saved_flow_data', 'event_tensors',  '{}frames'.format(str(num_frames_per_ts).zfill(2)), 'left')
+    save_path_events = os.path.join(root, 'saved_flow_data', 'event_tensors',  '{}frames'.format(str(num_frames_per_ts).zfill(2)))
     print(save_path_events)
-    _load_events(sequence, num_frames_per_ts, eventsL_path, timestamps, save_path_events)
+    #_load_events(sequence, num_frames_per_ts, eventsL_path, timestamps, save_path_events)
 
 
 
@@ -54,6 +54,11 @@ def _create_flow_maps(sequence: str, flow_maps_path, save_path_flow, save_path_m
         flow_x = (flow_16bit[:,:,0].astype(float) - 2**15) / 128.
         flow_y = (flow_16bit[:,:,1].astype(float) - 2**15) / 128.
         valid_pixels = flow_16bit[:,:,2].astype(bool)
+
+        valid_pixels = valid_pixels[240 - 100:240 + 100, 320 - 100: 320 + 100]
+
+        flow_x = flow_x[240 - 100:240 + 100, 320 - 100: 320 + 100]
+        flow_y = flow_y[240 - 100:240 + 100, 320 - 100: 320 + 100]
 
 
         flow_x = np.expand_dims(flow_x, axis=0)  # shape (H, W) --> (1, H, W)
@@ -111,7 +116,7 @@ def _load_events(sequence, num_frames_per_ts, events_path, timestamps, save_path
             y_rect = xy_rect[:, 1]
 
             # cumulate events
-            frame = cumulate_spikes_into_frames(x, y, p)
+            frame = cumulate_spikes_into_frames(x_rect, y_rect, p)
             chunk.append(frame)
 
         # format into chunks
@@ -126,3 +131,11 @@ def _load_events(sequence, num_frames_per_ts, events_path, timestamps, save_path
     # close hdf5 files
     datafile.close()
     rectmap_file.close()
+
+root = "E:\\DSEC\\"
+sequences = os.listdir(os.path.join(root, 'train'))
+num_to_load = len(sequences)
+for i in range(num_to_load):
+    if sequences[i] != "saved_flow_data" and sequences[i] != "flow_2_event_idx_mapping" and sequences[i] != "env_names.txt" and os.path.isdir(os.path.join(root, 'train', sequences[i], "flow")):
+        print("Sequence: ", sequences[i])
+        generate_files(root, sequences[i], 11)

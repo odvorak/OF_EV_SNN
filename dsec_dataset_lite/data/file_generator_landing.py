@@ -365,5 +365,5 @@ num_to_load = len(sequences)
 for i in range(num_to_load):
     if sequences[i] != "saved_flow_data" and sequences[i] != "flow_2_event_idx_mapping" and sequences[i] != "env_names.txt":
         print("Sequence: ", sequences[i])
-        generate_files(root, sequences[i], 11)
+        generate_files(root, sequences[i], 10)
 
