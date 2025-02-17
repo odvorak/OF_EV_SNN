@@ -33,7 +33,7 @@ for flight in flight_list:
     if not os.path.isdir(f'/root/results/tests/'):
         os.mkdir(f'/root/results/tests/')
 
-    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_l1_epoch30.pth'
+    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_l1_epoch32.pth'
     results_directory = f'/root/results11/{flight}/'
 
     if not os.path.isdir(results_directory):
