@@ -21,11 +21,11 @@ def make_sequence_list(sequence, root):
 
     print(root)
 
-    df.to_csv(os.path.join("/media/odvorak/Expansion/ALED_v30/test/saved_flow_data/", "sequence_lists", f'{sequence}.csv'), header = None, index = None)
+    df.to_csv(os.path.join("E:\\EBAL_v10\\test\\saved_flow_data\\", "sequence_lists", f'{sequence}.csv'), header = None, index = None)
 
     return f'{sequence}.csv'
 
 if __name__ == "__main__":
     tests = ["N9", "N10", "N11", "N12", "D9", "D10", "D11", "D12", "V9", "V10", "V11", "V12"]
     for test in tests:
-        make_sequence_list(test, '/media/odvorak/Expansion/ALED_v30/test/saved_flow_data/')
+        make_sequence_list(test, 'E:\\EBAL_v10\\test\\saved_flow_data\\')

@@ -359,11 +359,11 @@ def _load_events(sequence, num_frames_per_ts, events_path, timestamps, save_path
     # close hdf5 files
     datafile.close()
 
-root = "/media/odvorak/Expansion/ALED_v30/test"
+root = "E:\\EBAL_v10\\test\\"
 sequences = os.listdir(root)
 num_to_load = len(sequences)
 for i in range(num_to_load):
     if sequences[i] != "saved_flow_data" and sequences[i] != "flow_2_event_idx_mapping" and sequences[i] != "env_names.txt":
         print("Sequence: ", sequences[i])
-        generate_files(root, sequences[i], 10)
+        generate_files(root, sequences[i], 11)
 

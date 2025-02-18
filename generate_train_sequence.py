@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import numpy as np
 
-root = '/media/odvorak/Expansion/ALED_v30/train/saved_flow_data/'
+root = 'E:\\EBAL_v10\\train\\saved_flow_data\\'
 num_frames_per_ts = "11"
 events_path = os.path.join(root, 'event_tensors', '{}frames'.format(str(num_frames_per_ts).zfill(2)))
 

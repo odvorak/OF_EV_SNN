@@ -28,12 +28,19 @@ def rectify_events(x: np.ndarray, y: np.ndarray, rectify_map):
 def cumulate_spikes_into_frames(X_list, Y_list, P_list):
 
     frame = np.zeros((2, 200, 200), dtype='float')
+    # for x, y, p in zip(X_list, Y_list, P_list):
+    #     if int(y) > 140 and int(y) <= 339 and int(x) > 220 and int(x) <= 419:
+    #         if p == 1:
+    #             frame[0, int(y) - 140, int(x) - 220] += 1  # register ON event on channel 0
+    #         else:
+    #             frame[1, int(y) - 140, int(x) - 220] += 1  # register OFF event on channel 1
+    #
     for x, y, p in zip(X_list, Y_list, P_list):
-        if int(y) > 140 and int(y) <= 339 and int(x) > 220 and int(x) <= 419:
+        if int(y) > 0 and int(y) <= 200 and int(x) > 0 and int(x) <= 200:
             if p == 1:
-                frame[0, int(y) - 140, int(x) - 220] += 1  # register ON event on channel 0
+                frame[0, int(y), int(x)] += 1  # register ON event on channel 0
             else:
-                frame[1, int(y) - 140, int(x) - 220] += 1  # register OFF event on channel 1
+                frame[1, int(y), int(x)] += 1  # register OFF event on channel 1
 
     return frame
 
