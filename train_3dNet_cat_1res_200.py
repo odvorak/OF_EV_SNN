@@ -88,9 +88,24 @@ print('Trainable parameters: {}'.format(trainable_params))
 
 # Initialize network weights
 
-for m in net.modules():
-    if isinstance(m, nn.Conv2d):
-        nn.init.xavier_uniform_(m.weight)
+checkpoint_path = '/root/results31/checkpoints_and_logs/checkpoint_l1_epoch13.pth'
+#checkpoint_path = None
+# Initialize network weights
+if checkpoint_path is None:
+    for m in net.modules():
+        if isinstance(m, nn.Conv2d):
+            nn.init.xavier_uniform_(m.weight)
+
+# # Load checkpoint if provided
+if checkpoint_path is not None:
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+#     # Directly load the state dict into the model
+    net.load_state_dict(checkpoint)
+    print(f"Loaded model state dict from {checkpoint_path}")
+    #start_epoch = int(re.sub(r"[^0-9]", "", checkpoint_path))
+    start_epoch = 13
+else:
+    start_epoch = 0
 
 
 # Create the optimizer
