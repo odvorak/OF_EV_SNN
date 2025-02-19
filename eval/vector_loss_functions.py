@@ -35,7 +35,7 @@ def thesis_loss_function(pred, label, mask):
     # Compute correlation loss
     corr_loss = torch.abs(unsig_u_smooth) + torch.abs(unsig_v_smooth)
 
-    return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss * mask) / n_pixels
+    return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss) / n_pixels
 
     
 def rel_loss_function(pred, label, mask, epsilon = 1e-7):
