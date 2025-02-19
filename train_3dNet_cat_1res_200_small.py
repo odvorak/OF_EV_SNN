@@ -81,7 +81,7 @@ valid_dataloader = torch.utils.data.DataLoader(dataset = valid_dataset, batch_si
 
 # Create the network
 
-net = NeuronPool_Separable_Pool3d_200(multiply_factor = 35.).to(device)
+net = NeuronPool_Separable_Pool3d_200_small(multiply_factor = 35.).to(device)
 trainable_params = sum(p.numel() for p in net.parameters() if p.requires_grad)
 print('Trainable parameters: {}'.format(trainable_params))
 
