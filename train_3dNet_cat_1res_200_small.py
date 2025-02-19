@@ -283,7 +283,7 @@ for epoch in range(n_epochs):
     if save_net & (epoch_loss_valid < test_acc):       
 
         test_acc = epoch_loss_valid
-        torch.save(net.state_dict(), '/root/results31/checkpoints_and_logs/checkpoint_l1_epoch{}.pth'.format(epoch))
+        torch.save(net.state_dict(), '/root/results/checkpoints_and_logs/checkpoint_small_epoch{}.pth'.format(epoch))
 
 
     scheduler.step()

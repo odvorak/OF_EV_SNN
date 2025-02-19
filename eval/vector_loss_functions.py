@@ -21,21 +21,21 @@ def thesis_loss_function(pred, label, mask):
     # unsig_v_down = torch.nn.functional.avg_pool2d(unsig_v, kernel_size=50, stride=50)
     # corr_loss = torch.abs(unsig_u_down) + torch.abs(unsig_v_down)
     # return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss) / 16
-    #return torch.sum(error_mod * mask) / n_pixels
+    return torch.sum(error_mod * mask) / n_pixels
 
-    kernel_size = 50
-
-    # Create a mean kernel (normalized)
-    mean_kernel = torch.ones((1, 1, kernel_size, kernel_size), device='cuda') / (kernel_size ** 2)
-
-    # Apply the mean filter to smooth the entire field
-    unsig_u_smooth = torch.nn.functional.conv2d(sig_u, mean_kernel, padding=kernel_size // 2)
-    unsig_v_smooth = torch.nn.functional.conv2d(sig_v, mean_kernel, padding=kernel_size // 2)
-
-    # Compute correlation loss
-    corr_loss = torch.abs(unsig_u_smooth) + torch.abs(unsig_v_smooth)
-
-    return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss) / n_pixels
+    # kernel_size = 50
+    #
+    # # Create a mean kernel (normalized)
+    # mean_kernel = torch.ones((1, 1, kernel_size, kernel_size), device='cuda') / (kernel_size ** 2)
+    #
+    # # Apply the mean filter to smooth the entire field
+    # unsig_u_smooth = torch.nn.functional.conv2d(sig_u, mean_kernel, padding=kernel_size // 2)
+    # unsig_v_smooth = torch.nn.functional.conv2d(sig_v, mean_kernel, padding=kernel_size // 2)
+    #
+    # # Compute correlation loss
+    # corr_loss = torch.abs(unsig_u_smooth) + torch.abs(unsig_v_smooth)
+    #
+    # return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss) / n_pixels
 
     
 def rel_loss_function(pred, label, mask, epsilon = 1e-7):
