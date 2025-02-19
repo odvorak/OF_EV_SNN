@@ -27,13 +27,13 @@ import os
 flight_list = ["N9", "N10", "N11", "N12", "D9", "D10", "D11", "D12", "V9", "V10", "V11", "V12"]
 
 for flight in flight_list:
-    root_folder = f'/root/saved_flow_data_test/'
-    sequence_list = f'/root/saved_flow_data_test/sequence_lists/{flight}.csv'
+    root_folder = f'/root/saved_flow_data_ebal_test/'
+    sequence_list = f'/root/saved_flow_data_ebal_test/sequence_lists/{flight}.csv'
 
     if not os.path.isdir(f'/root/results/tests/'):
         os.mkdir(f'/root/results/tests/')
 
-    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_l1_epoch32.pth'
+    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_l1_epoch22.pth'
     results_directory = f'/root/results/{flight}/'
 
     if not os.path.isdir(results_directory):
