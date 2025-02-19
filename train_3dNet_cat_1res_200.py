@@ -88,7 +88,7 @@ print('Trainable parameters: {}'.format(trainable_params))
 
 # Initialize network weights
 
-checkpoint_path = '/root/dsec.pth'
+checkpoint_path = '/root/OF_EV_SNN/dsec.pth'
 #checkpoint_path = None
 # Initialize network weights
 if checkpoint_path is None:
