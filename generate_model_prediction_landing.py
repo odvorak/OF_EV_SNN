@@ -11,7 +11,7 @@ from torch.autograd import Variable
 from spikingjelly.clock_driven import functional
 from spikingjelly.clock_driven import neuron
 
-from network_3d.poolingNet_cat_1res_200_small import NeuronPool_Separable_Pool3d_200_small
+from network_3d.poolingNet_cat_1res_200 import NeuronPool_Separable_Pool3d_200
 
 
 from tqdm import tqdm
@@ -33,7 +33,7 @@ for flight in flight_list:
     if not os.path.isdir(f'/root/results/tests/'):
         os.mkdir(f'/root/results/tests/')
 
-    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_small_epoch34.pth'
+    checkpoint = f'/root/results/checkpoints_and_logs/checkpoint_l1_epoch21.pth'
     results_directory = f'/root/results/{flight}/'
 
     if not os.path.isdir(results_directory):
@@ -58,7 +58,7 @@ for flight in flight_list:
     # Define validation dataloader
     valid_dataloader = torch.utils.data.DataLoader(dataset = valid_dataset, batch_size = 1, shuffle = False, drop_last = False, pin_memory = True)
 
-    net = NeuronPool_Separable_Pool3d_200_small().to(device)
+    net = NeuronPool_Separable_Pool3d_200().to(device)
     net.load_state_dict(torch.load(checkpoint))
 
     pred_sequence = []
