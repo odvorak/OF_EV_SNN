@@ -17,10 +17,6 @@ def thesis_loss_function(pred, label, mask):
     error_mod = torch.sqrt(torch.pow(pred[:, 0] - label[:, 0], 2) + torch.pow(pred[:, 1] - label[:, 1], 2))
     sig_u = pred[:, 0] - label[:, 0]
     sig_v = pred[:, 1] - label[:, 1]
-    # unsig_u_down = torch.nn.functional.avg_pool2d(unsig_u, kernel_size=50, stride=50)
-    # unsig_v_down = torch.nn.functional.avg_pool2d(unsig_v, kernel_size=50, stride=50)
-    # corr_loss = torch.abs(unsig_u_down) + torch.abs(unsig_v_down)
-    # return torch.sum(error_mod * mask) / n_pixels + 0.5 * torch.sum(corr_loss) / 16
     return torch.sum(error_mod * mask) / n_pixels
 
     # kernel_size = 50
