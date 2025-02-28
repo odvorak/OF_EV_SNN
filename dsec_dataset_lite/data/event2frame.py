@@ -37,6 +37,11 @@ def cumulate_spikes_into_frames(X_list, Y_list, P_list):
     #
     for x, y, p in zip(X_list, Y_list, P_list):
         if int(y) > 0 and int(y) <= 200 and int(x) > 0 and int(x) <= 200:
+            # if 0 < int(y) <= 100 and 0 < int(x) <= 100:
+            #     if np.random.choice([True, False]):
+            #         pass  # Continue executing the current iteration
+            #     else:
+            #         continue  # Skip the rest and start the next iteration
             if p == 1:
                 frame[0, int(y), int(x)] += 1  # register ON event on channel 0
             else:

@@ -359,12 +359,12 @@ def _load_events(sequence, num_frames_per_ts, events_path, timestamps, save_path
     # close hdf5 files
     datafile.close()
 
-#root = "E:\\EBAL_v10\\test\\"
-root = "C:\\Users\\ondre\\Desktop\\Msc Thesis\\warper\\EBALS\\output_videos"
+root = "E:\\EBAL_v10\\test\\"
+#root = "C:\\Users\\ondre\\Desktop\\Msc Thesis\\warper\\EBALS\\output_videos"
 sequences = os.listdir(root)
 num_to_load = len(sequences)
 for i in range(num_to_load):
-    if sequences[i] != "saved_flow_data" and sequences[i] != "flow_2_event_idx_mapping" and sequences[i] != "env_names.txt":
+    if sequences[i] != "saved_flow_data" and sequences[i] != "flow_2_event_idx_mapping" and sequences[i] != "env_names.txt" and sequences[i] != "savedir_test":
         print("Sequence: ", sequences[i])
         generate_files(root, sequences[i], 11)
 
