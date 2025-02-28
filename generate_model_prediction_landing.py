@@ -27,7 +27,7 @@ import os
 flight_list = ["N9", "N10", "N11", "N12", "D9", "D10", "D11", "D12", "V9", "V10", "V11", "V12"]
 
 for flight in flight_list:
-    root_folder = f'/root/saved_flow_data_ebal_test/'
+    root_folder = f'/root/saved_flow_data_def/'
     sequence_list = f'/root/saved_flow_data_ebal_test/sequence_lists/{flight}.csv'
 
     if not os.path.isdir(f'/root/results/tests/'):
